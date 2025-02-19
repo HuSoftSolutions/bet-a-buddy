@@ -2,6 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
+
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number>(-1);
 
@@ -129,6 +130,18 @@ export default function Home() {
   useEffect(() => {
     window.history.replaceState({}, document.title, window.location.pathname);
   }, []);
+	
+	useEffect(() => {
+		const savedScrollPosition = sessionStorage.getItem("scrollPosition");
+		if (savedScrollPosition) {
+			window.scrollTo(0, parseInt(savedScrollPosition));
+		}
+	
+		return () => {
+			sessionStorage.setItem("scrollPosition", window.scrollY.toString());
+		};
+	}, []);
+	
 
   useEffect(() => {
     if (!videoRef.current) return;
