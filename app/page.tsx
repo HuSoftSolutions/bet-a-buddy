@@ -3,9 +3,9 @@ import { useEffect, useRef, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
 const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState< number>(-1);
+  const [openIndex, setOpenIndex] = useState<number>(-1);
 
-  const toggleFAQ = (index=0) => {
+  const toggleFAQ = (index = 0) => {
     setOpenIndex(openIndex === index ? -1 : index);
   };
 
@@ -25,7 +25,7 @@ const FAQ = () => {
               answer:
                 "Yes, signing up and placing bets with friends is completely free.",
             },
-						{
+            {
               question: "How do I place a bet?",
               answer:
                 "Simply create a bet, invite your friends, and track the results.",
@@ -34,7 +34,7 @@ const FAQ = () => {
               question: "Is it free to join?",
               answer:
                 "Yes, signing up and placing bets with friends is completely free.",
-            }
+            },
           ].map((faq, index) => (
             <div
               key={index}
@@ -71,24 +71,25 @@ const FAQ = () => {
 };
 
 interface ModalProps {
-	show: boolean, 
-	close: () => void
+  show: boolean;
+  close: () => void;
 }
 
-const Modal:React.FC<ModalProps> = ({ show, close }) => {
+const Modal: React.FC<ModalProps> = ({ show, close }) => {
   return show === true ? (
     <div className="fixed top-0 left-0 h-screen w-full flex items-center justify-center z-20 bg-black bg-opacity-80 text-white">
       <div className="w-full sm:w-[400px] h-auto bg-gradient-to-b from-green-600 to-green-800 flex flex-col z-30 relative rounded-lg p-5 shadow-lg">
-        
         {/* Close Button */}
         <div className="absolute top-2 right-2 cursor-pointer" onClick={close}>
-          <IoCloseOutline className="w-8 h-8 text-white hover:text-gray-300 transition duration-300"/>
+          <IoCloseOutline className="w-8 h-8 text-white hover:text-gray-300 transition duration-300" />
         </div>
-        
+
         {/* Sign-up Form */}
         <div className="w-full text-center">
           <h2 className="text-2xl font-bold mb-4">Stay Updated!</h2>
-          <p className="mb-6 text-sm">Sign up for exclusive updates and news about Bet A Buddy.</p>
+          <p className="mb-6 text-sm">
+            Sign up for exclusive updates and news about Bet A Buddy.
+          </p>
 
           <form className="space-y-4">
             <div>
@@ -118,18 +119,16 @@ const Modal:React.FC<ModalProps> = ({ show, close }) => {
       </div>
     </div>
   ) : null;
-}
-
+};
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [fade, setFade] = useState<boolean>(false);
-  const [showModal, setShowModal] = useState<boolean>(false)
+  const [showModal, setShowModal] = useState<boolean>(false);
 
-	useEffect(() => {
-		window.history.replaceState({}, document.title, window.location.pathname);
-	}, []);
-	
+  useEffect(() => {
+    window.history.replaceState({}, document.title, window.location.pathname);
+  }, []);
 
   useEffect(() => {
     if (!videoRef.current) return;
@@ -161,12 +160,12 @@ export default function Home() {
       <section className="relative h-screen overflow-hidden">
         {/* Video background */}
         <video
-          className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
-            fade ? "opacity-75" : "opacity-100"
-          }`}
+          className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 
+             pointer-events-none"
           autoPlay
           loop
           muted
+          playsInline
           ref={videoRef}
         >
           <source src="/hero_video.mp4" type="video/mp4" />
@@ -180,7 +179,7 @@ export default function Home() {
           <h1 className="text-4xl sm:text-7xl font-bold text-green-800 ">
             Bet A Buddy
           </h1>
-          <p className="text-sm sm:text-lg mt-2 text-white">
+          <p className="text-xs sm:text-lg mt-2 text-white">
             The ultimate sports betting experience with friends
           </p>
           <button className="bg-green-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-green-800 mt-10 animate-pulse">
@@ -228,11 +227,13 @@ export default function Home() {
             Connect with like-minded sports fans and enjoy the thrill of
             friendly betting.
           </p>
-          <button className="bg-green-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-green-800" onClick={() => {
-						console.log('fired')
-						setShowModal(true)
-						}
-					}>
+          <button
+            className="bg-green-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-green-800"
+            onClick={() => {
+              console.log("fired");
+              setShowModal(true);
+            }}
+          >
             Sign Up Now
           </button>
         </div>
