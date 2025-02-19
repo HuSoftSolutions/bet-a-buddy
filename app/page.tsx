@@ -160,8 +160,9 @@ export default function Home() {
       <section className="relative h-screen overflow-hidden">
         {/* Video background */}
         <video
-          className="absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 
-             pointer-events-none"
+          className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
+            fade ? "opacity-75" : "opacity-100"
+          }`}
           autoPlay
           loop
           muted
