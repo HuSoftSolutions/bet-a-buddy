@@ -176,11 +176,11 @@ export default function Home() {
         <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
 
         {/* Title and tagline */}
-        <div className="relative z-10 flex flex-col items-center justify-center h-full">
+        <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
           <h1 className="text-4xl sm:text-7xl font-bold text-green-800 ">
             Bet A Buddy
           </h1>
-          <p className="text-xs sm:text-lg mt-2 text-white">
+          <p className="text-sm px-3 sm:text-lg mt-2 text-white">
             The ultimate sports betting experience with friends
           </p>
           <button className="bg-green-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-green-800 mt-10 animate-pulse">
