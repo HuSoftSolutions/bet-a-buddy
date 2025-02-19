@@ -1,11 +1,12 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import { IoCloseOutline } from "react-icons/io5";
 
 const FAQ = () => {
-  const [openIndex, setOpenIndex] = useState(null);
+  const [openIndex, setOpenIndex] = useState< number>(-1);
 
-  const toggleFAQ = (index) => {
-    setOpenIndex(openIndex === index ? null : index);
+  const toggleFAQ = (index=0) => {
+    setOpenIndex(openIndex === index ? -1 : index);
   };
 
   return (
@@ -16,12 +17,24 @@ const FAQ = () => {
           {[
             {
               question: "How do I place a bet?",
-              answer: "Simply create a bet, invite your friends, and track the results.",
+              answer:
+                "Simply create a bet, invite your friends, and track the results.",
             },
             {
               question: "Is it free to join?",
-              answer: "Yes, signing up and placing bets with friends is completely free.",
+              answer:
+                "Yes, signing up and placing bets with friends is completely free.",
             },
+						{
+              question: "How do I place a bet?",
+              answer:
+                "Simply create a bet, invite your friends, and track the results.",
+            },
+            {
+              question: "Is it free to join?",
+              answer:
+                "Yes, signing up and placing bets with friends is completely free.",
+            }
           ].map((faq, index) => (
             <div
               key={index}
@@ -32,13 +45,19 @@ const FAQ = () => {
                 className="font-semibold cursor-pointer w-full text-left flex justify-between items-center"
               >
                 {faq.question}
-                <span className={`transform transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""}`}>
+                <span
+                  className={`transform transition-transform duration-300 ${
+                    openIndex === index ? "rotate-180" : ""
+                  }`}
+                >
                   ▼
                 </span>
               </button>
               <div
                 className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  openIndex === index ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"
+                  openIndex === index
+                    ? "max-h-[500px] opacity-100"
+                    : "max-h-0 opacity-0"
                 }`}
               >
                 <p className="mt-2">{faq.answer}</p>
@@ -51,39 +70,78 @@ const FAQ = () => {
   );
 };
 
-function Modal({show}) {
-	return (
-show ? (<div className="absolute top-0 left-0 h-screen w-full flex items-center justify-center z-20 bg-black bg-opacity-80">
+interface ModalProps {
+	show: boolean, 
+	close: () => void
+}
 
-			<div className="w-full sm:w-[400px] h-[500px] bg-gray-800 flex flex-col z-10">
-				<div className="w-full h-full">
-				Hello World!
-				</div>
-			</div>
-				
-			</div>) : null)
+const Modal:React.FC<ModalProps> = ({ show, close }) => {
+  return show === true ? (
+    <div className="fixed top-0 left-0 h-screen w-full flex items-center justify-center z-20 bg-black bg-opacity-80 text-white">
+      <div className="w-full sm:w-[400px] h-auto bg-gradient-to-b from-green-600 to-green-800 flex flex-col z-30 relative rounded-lg p-5 shadow-lg">
+        
+        {/* Close Button */}
+        <div className="absolute top-2 right-2 cursor-pointer" onClick={close}>
+          <IoCloseOutline className="w-8 h-8 text-white hover:text-gray-300 transition duration-300"/>
+        </div>
+        
+        {/* Sign-up Form */}
+        <div className="w-full text-center">
+          <h2 className="text-2xl font-bold mb-4">Stay Updated!</h2>
+          <p className="mb-6 text-sm">Sign up for exclusive updates and news about Bet A Buddy.</p>
 
+          <form className="space-y-4">
+            <div>
+              <input
+                type="text"
+                placeholder="Your Name"
+                className="w-full px-4 py-2 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400"
+                required
+              />
+            </div>
+            <div>
+              <input
+                type="email"
+                placeholder="Your Email"
+                className="w-full px-4 py-2 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400"
+                required
+              />
+            </div>
+            <button
+              type="submit"
+              className="w-full bg-white text-green-700 font-semibold py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300"
+            >
+              Sign Up
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+  ) : null;
 }
 
 
-
 export default function Home() {
-
-	const videoRef = useRef(null);
-	const [fade, setFade] = useState(false);
-	const [showModal, setShowModal] = useState(false)
+  const videoRef = useRef<HTMLVideoElement | null>(null);
+  const [fade, setFade] = useState<boolean>(false);
+  const [showModal, setShowModal] = useState<boolean>(false)
 
 	useEffect(() => {
-		if(videoRef.current){
-			videoRef.current.playbackRate = 1;
-		}
+		window.history.replaceState({}, document.title, window.location.pathname);
+	}, []);
+	
 
-		videoRef.current.addEventListener("timeupdate", () => {
-			const video = videoRef.current;
-			setFade(video.currentTime >= video.duration - 1)
-			
-		})
-	},[])
+  useEffect(() => {
+    if (!videoRef.current) return;
+
+    videoRef.current.playbackRate = 1;
+
+    videoRef.current.addEventListener("timeupdate", () => {
+      const video = videoRef.current;
+      if (!video) return;
+      setFade(video.currentTime >= video.duration - 1);
+    });
+  }, []);
 
   return (
     <div className="relative bg-gray-50 min-h-screen text-gray-900">
@@ -109,8 +167,7 @@ export default function Home() {
           autoPlay
           loop
           muted
-					ref={videoRef}
-					
+          ref={videoRef}
         >
           <source src="/hero_video.mp4" type="video/mp4" />
         </video>
@@ -126,10 +183,10 @@ export default function Home() {
           <p className="text-sm sm:text-lg mt-2 text-white">
             The ultimate sports betting experience with friends
           </p>
-					<button className="bg-green-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-green-800 mt-10 animate-pulse">
-					<a href="#about" className="hover:text-white">
-					  Learn More
-						</a>
+          <button className="bg-green-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-green-800 mt-10 animate-pulse">
+            <a href="#about" className="hover:text-white">
+              Learn More
+            </a>
           </button>
         </div>
       </section>
@@ -171,13 +228,17 @@ export default function Home() {
             Connect with like-minded sports fans and enjoy the thrill of
             friendly betting.
           </p>
-          <button className="bg-green-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-green-800">
+          <button className="bg-green-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-green-800" onClick={() => {
+						console.log('fired')
+						setShowModal(true)
+						}
+					}>
             Sign Up Now
           </button>
         </div>
       </section>
 
-  <FAQ />
+      <FAQ />
 
       {/* Contact Section */}
       <section id="contact" className="bg-gray-100 py-16 px-4 text-center">
@@ -189,7 +250,7 @@ export default function Home() {
         </div>
       </section>
 
-			<Modal show={showModal} />
+      <Modal show={showModal} close={() => setShowModal(false)} />
 
       {/* Footer */}
       <footer className="bg-green-900 text-white text-center py-6">
