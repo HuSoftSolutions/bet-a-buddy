@@ -193,7 +193,7 @@ export default function Home() {
         {/* Title and tagline */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
 					{/* <div className="bg-primary-dark p-10 rounded-xl bg-opacity-70 border-8 border-primary-dark"> */}
-					<Image src="betabuddysportslogo-green.svg" width={100} height={100} className="mb-5" />
+					<Image src="betabuddysportslogo-green.svg" width={100} height={100} className="mb-5" alt="Logo" />
 
 					<div className="">
 
