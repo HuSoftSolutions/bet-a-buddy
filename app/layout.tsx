@@ -1,11 +1,11 @@
 // app/layout.tsx
-import { Orbitron } from 'next/font/google';
+import { Karantina } from 'next/font/google';
 import './globals.css';
 
 // Initialize Orbitron font
-const orbitron = Orbitron({
+const orbitron = Karantina({
   subsets: ['latin'],
-  weight: ['400', '500', '700'], // You can specify weights if you need
+  weight: ['300', '400', '700'], // You can specify weights if you need
 });
 
 export const metadata = {

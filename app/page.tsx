@@ -1,4 +1,6 @@
 "use client";
+
+import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
@@ -11,9 +13,9 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="py-16 px-4">
+    <section id="faq" className="py-10 px-4 bg-primary-dark">
       <div className="max-w-3xl mx-auto text-center">
-        <h2 className="text-3xl font-bold mb-6">How It Works</h2>
+        <h1 className="font-bold mb-8 text-white">How It Works</h1>
         <div className="space-y-4 text-left">
           {[
             {
@@ -45,7 +47,7 @@ const FAQ = () => {
                 onClick={() => toggleFAQ(index)}
                 className="font-semibold cursor-pointer w-full text-left flex justify-between items-center"
               >
-                {faq.question}
+                <h2>{faq.question}</h2>
                 <span
                   className={`transform transition-transform duration-300 ${
                     openIndex === index ? "rotate-180" : ""
@@ -79,7 +81,7 @@ interface ModalProps {
 const Modal: React.FC<ModalProps> = ({ show, close }) => {
   return show === true ? (
     <div className="fixed top-0 left-0 h-screen w-full flex items-center justify-center z-20 bg-black bg-opacity-80 text-white">
-      <div className="w-full sm:w-[400px] h-auto bg-gradient-to-b from-green-600 to-green-800 flex flex-col z-30 relative rounded-lg p-5 shadow-lg">
+      <div className="w-full sm:w-[400px] h-auto bg-gradient-to-b from-primary-dark to-primary-light flex flex-col z-30 relative rounded-lg p-5 shadow-lg">
         {/* Close Button */}
         <div className="absolute top-2 right-2 cursor-pointer" onClick={close}>
           <IoCloseOutline className="w-8 h-8 text-white hover:text-gray-300 transition duration-300" />
@@ -87,9 +89,9 @@ const Modal: React.FC<ModalProps> = ({ show, close }) => {
 
         {/* Sign-up Form */}
         <div className="w-full text-center">
-          <h2 className="text-2xl font-bold mb-4">Stay Updated!</h2>
-          <p className="mb-6 text-sm">
-            Sign up for exclusive updates and news about Bet A Buddy.
+          <h2 className="font-bold mb-4">Stay Updated!</h2>
+          <p className="mb-6">
+            Sign up for exclusive updates and news about Bet A Buddy Sports.
           </p>
 
           <form className="space-y-4">
@@ -97,7 +99,7 @@ const Modal: React.FC<ModalProps> = ({ show, close }) => {
               <input
                 type="text"
                 placeholder="Your Name"
-                className="w-full px-4 py-2 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400"
+                className="w-full px-4 py-2 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-dark"
                 required
               />
             </div>
@@ -105,13 +107,13 @@ const Modal: React.FC<ModalProps> = ({ show, close }) => {
               <input
                 type="email"
                 placeholder="Your Email"
-                className="w-full px-4 py-2 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-green-400"
+                className="w-full px-4 py-2 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-dark"
                 required
               />
             </div>
             <button
               type="submit"
-              className="w-full bg-white text-green-700 font-semibold py-2 rounded-md shadow-md hover:bg-gray-100 transition duration-300"
+              className="btn w-full font-semibold py-2 rounded-md shadow-md transition duration-300"
             >
               Sign Up
             </button>
@@ -158,14 +160,14 @@ export default function Home() {
   return (
     <div className="relative bg-gray-50 min-h-screen text-gray-900">
       {/* Navbar */}
-      <nav className="w-full bg-white shadow-md py-4 px-6 flex justify-between items-center fixed top-0 left-0 z-50">
-        <h2 className="text-xl font-bold text-green-800">Bet A Buddy</h2>
+      <nav className="w-full bg-black shadow-md py-4 px-6 flex justify-between items-center fixed top-0 left-0 z-50">
+        <h2 className="text-3xl font-bold text-primary uppercase">Bet A Buddy Sports</h2>
         {/* <ul className="flex space-x-6">
-          <li><a href="#about" className="hover:text-green-600">About</a></li>
-          <li><a href="#features" className="hover:text-green-600">Features</a></li>
-          <li><a href="#community" className="hover:text-green-600">Community</a></li>
-          <li><a href="#faq" className="hover:text-green-600">FAQ</a></li>
-          <li><a href="#contact" className="hover:text-green-600">Contact</a></li>
+          <li><a href="#about" className="hover:text-primary">About</a></li>
+          <li><a href="#features" className="hover:text-primary">Features</a></li>
+          <li><a href="#community" className="hover:text-primary">Community</a></li>
+          <li><a href="#faq" className="hover:text-primary">FAQ</a></li>
+          <li><a href="#contact" className="hover:text-primary">Contact</a></li>
         </ul> */}
       </nav>
 
@@ -174,7 +176,7 @@ export default function Home() {
         {/* Video background */}
         <video
           className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
-            fade ? "opacity-75" : "opacity-100"
+            fade ? "opacity-100" : "opacity-100"
           }`}
           autoPlay
           loop
@@ -182,67 +184,75 @@ export default function Home() {
           playsInline
           ref={videoRef}
         >
-          <source src="/hero_video.mp4" type="video/mp4" />
+          <source src="/betabuddyherovideo.mp4" type="video/mp4" />
         </video>
 
         {/* Dark overlay */}
-        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-80"></div>
+        <div className="absolute top-0 left-0 w-full h-full bg-black opacity-85"></div>
 
         {/* Title and tagline */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
-          <h1 className="text-4xl sm:text-7xl font-bold text-green-800 ">
-            Bet A Buddy
+					{/* <div className="bg-primary-dark p-10 rounded-xl bg-opacity-70 border-8 border-primary-dark"> */}
+					<Image src="betabuddysportslogo-green.svg" width={100} height={100} className="mb-5" />
+
+					<div className="">
+
+          <h1 className="font-bold text-primary uppercase">
+            Bet A Buddy Sports
           </h1>
-          <p className="text-sm px-3 sm:text-lg mt-2 text-white">
+          <p className="px-3 mt-2 text-gray-300">
             The ultimate sports betting experience with friends
           </p>
-          <button className="bg-green-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-green-800 mt-10 animate-pulse">
+          <button className="btn py-2 px-6 rounded-full shadow-md mt-10">
             <a href="#about" className="hover:text-white">
               Learn More
             </a>
           </button>
         </div>
+				</div>
       </section>
 
       {/* About Section */}
       <section id="about" className="py-16 px-4 text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4">What is Bet A Buddy?</h2>
-          <p className="text-lg">
-            A fun and social way to place bets with friends and track results
-            seamlessly.
+          <h1 className="font-extrabold mb-4 text-primary">What is Bet A Buddy Sports?</h1>
+          <p className="text-primary">
+					A fun and social way to place bets with friends and use rewards points for prizes.
           </p>
         </div>
       </section>
 
+
       {/* Features Section */}
-      <section id="features" className="py-16 px-4">
+      <section id="features" className="py-16 px-4 flex flex-col items-center bg-black">
+				<h1 className="font-extrabold pb-10 text-white uppercase">Bet on your<span className="text-primary">$</span>elf</h1>
+
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 text-center">
           <div className="bg-white p-6 shadow-md rounded-lg border border-gray-200 transform transition duration-500 hover:scale-105">
-            <h3 className="text-xl font-semibold mb-2">Easy Bets</h3>
-            <p>Place friendly wagers with your buddies in just a few clicks.</p>
+            <h2 className="font-semibold mb-2 text-primary-dark">Easy Bets</h2>
+            <p className="text-primary">Place friendly wagers with your buddies in just a few clicks.</p>
           </div>
           <div className="bg-white p-6 shadow-md rounded-lg border border-gray-200 transform transition duration-500 hover:scale-105">
-            <h3 className="text-xl font-semibold mb-2">Track Results</h3>
-            <p>Real-time updates on bets, winnings, and leaderboards.</p>
+            <h2 className="font-semibold mb-2 text-primary-dark">Track Results</h2>
+            <p className="text-primary">Real-time updates on bets, winnings, and leaderboards.</p>
           </div>
           <div className="bg-white p-6 shadow-md rounded-lg border border-gray-200 transform transition duration-500 hover:scale-105">
-            <h3 className="text-xl font-semibold mb-2">Win Big</h3>
-            <p>Compete with friends and climb the ranks for rewards.</p>
+            <h2 className="font-semibold mb-2 text-primary-dark">Win Big</h2>
+            <p className="text-primary">Win cash on the wager AND win points redeemable for prizes.</p>
           </div>
         </div>
       </section>
 
       {/* Community Section */}
-      <section id="community" className="bg-green-100 py-16 px-4">
+      <section id="community" className=" py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-4">Join the Community</h2>
-          <p className="text-lg mb-6">
+          <h1 className="font-bold mb-4">Join the Community</h1>
+          <p className="mb-6">
             Connect with like-minded sports fans and enjoy the thrill of
             friendly betting.
           </p>
           <button
-            className="bg-green-700 text-white py-2 px-6 rounded-full shadow-md hover:bg-green-800"
+            className="btn py-2 px-6 rounded-full shadow-md"
             onClick={() => {
               console.log("fired");
               setShowModal(true);
@@ -258,8 +268,8 @@ export default function Home() {
       {/* Contact Section */}
       <section id="contact" className="bg-gray-100 py-16 px-4 text-center">
         <div className="max-w-4xl mx-auto">
-          <h2 className="text-3xl font-bold mb-4">Get in Touch</h2>
-          <p className="text-lg">
+          <h1 className="font-bold mb-4">Get in Touch</h1>
+          <p className="">
             Have questions? Reach out to us at support@betabuddy.com
           </p>
         </div>
@@ -268,9 +278,9 @@ export default function Home() {
       <Modal show={showModal} close={() => setShowModal(false)} />
 
       {/* Footer */}
-      <footer className="bg-green-900 text-white text-center py-6">
+      <footer className="bg-black text-white text-center py-6">
         <p>
-          &copy; {new Date().getFullYear()} Bet A Buddy. All Rights Reserved.
+          &copy; {new Date().getFullYear()} Bet A Buddy Sports. All Rights Reserved.
         </p>
       </footer>
     </div>

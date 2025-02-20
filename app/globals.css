@@ -23,3 +23,19 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+h1 {
+	@apply text-4xl sm:text-7xl
+}
+
+h2 {
+	@apply text-2xl sm:text-4xl
+}
+
+p {
+	@apply text-xl sm:text-2xl
+}
+
+.btn {
+	@apply bg-primary-dark hover:bg-primary text-white text-lg sm:text-2xl
+}
