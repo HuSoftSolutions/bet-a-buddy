@@ -184,7 +184,7 @@ export default function Home() {
           playsInline
           ref={videoRef}
         >
-          <source src="/betabuddyherovideo_2.mp4" type="video/mp4" />
+          <source src="/betabuddyherovideo_3.mp4" type="video/mp4" />
         </video>
 
         {/* Dark overlay */}
