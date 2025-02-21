@@ -184,7 +184,7 @@ export default function Home() {
           playsInline
           ref={videoRef}
         >
-          <source src="/betabuddyherovideo.mp4" type="video/mp4" />
+          <source src="/betabuddyherovideo_2.mp4" type="video/mp4" />
         </video>
 
         {/* Dark overlay */}
@@ -201,7 +201,7 @@ export default function Home() {
             Bet A Buddy Sports
           </h1>
           <p className="px-3 mt-2 text-gray-300">
-            The ultimate sports betting experience with friends
+					 Partner up, challenge others, and control the outcome with your skills to cash in! 
           </p>
           <button className="btn py-2 px-6 rounded-full shadow-md mt-10">
             <a href="#about" className="hover:text-white">
