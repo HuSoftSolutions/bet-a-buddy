@@ -17,6 +17,19 @@ export default {
           dark: '#14532d',
         },
       },
+			animation: {
+        'wave-gradient': 'wave 7s infinite linear',
+      },
+      keyframes: {
+        wave: {
+          '0%': { 'background-position': '0% 50%' },
+          '50%': { 'background-position': '100% 50%' },
+          '100%': { 'background-position': '0% 50%' },
+        },
+      },
+      backgroundSize: {
+        'size-200': '200% 200%',
+      },
 			// fontSize: {
       //   xs: '20px',    // Custom value for xs
       //   sm: '25px',   // Custom value for sm

@@ -13,7 +13,7 @@ const FAQ = () => {
   };
 
   return (
-    <section id="faq" className="py-10 px-4 bg-primary-dark">
+    <section id="faq" className="py-10 px-4 bg-gradient-to-r from-green-400 via-green-600 to-green-800 bg-size-200 animate-wave-gradient">
       <div className="max-w-3xl mx-auto text-center">
         <h1 className="font-bold mb-8 text-white">How It Works</h1>
         <div className="space-y-4 text-left">
