@@ -2,6 +2,13 @@
 @tailwind components;
 @tailwind utilities;
 
+@font-face {
+  font-family: "Karantina";
+  src: url("/fonts/Karantina/Karantina-Bold.ttf") format("truetype");
+  font-weight: 400;
+  font-style: normal;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;
@@ -25,17 +32,17 @@ body {
 }
 
 h1 {
-	@apply text-4xl sm:text-7xl
+  @apply text-4xl sm:text-7xl;
+  font-family: "Karantina", sans-serif;
 }
 
-h2 {
-	@apply text-2xl sm:text-4xl
+.header {
+  font-family: "Karantina", sans-serif;
+
 }
 
-p {
-	@apply text-xl sm:text-2xl
-}
 
 .btn {
-	@apply bg-primary-dark hover:bg-primary text-white text-lg sm:text-2xl
+  @apply bg-primary-dark hover:bg-primary text-white text-lg sm:text-2xl;
+  font-family: "Karantina", sans-serif;
 }

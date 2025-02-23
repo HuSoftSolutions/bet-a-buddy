@@ -5,6 +5,52 @@ import { useEffect, useRef, useState } from "react";
 import { IoCloseOutline } from "react-icons/io5";
 
 
+const FAQ_DATA = [
+  {
+    question: "How do users earn points?",
+    answer: [
+      "Users earn points on three different occasions:",
+      [
+        "Matching with a partner",
+        "Matching with an opponent",
+        "Winning the match",
+      ],
+      "You earn more points when you match with partners and opponents you haven't matched with before.",
+    ],
+  },
+  {
+    question: "How do users redeem points for prizes?",
+    answer: [
+      "Users redeem prizes with their accumulated points by heading over to the merchandise store to discover what they are eligible for based on their accumulated point total.",
+    ],
+  },
+  {
+    question: "Is it free to join?",
+    answer: [
+      "Yes, we do offer a free version of Bet A Buddy Sports. However, a premium version is available which gives users many more features, offering a much higher quality experience.",
+    ],
+  },
+  {
+    question: "Do people with similar abilities have to play together?",
+    answer: [
+      "No. Once Bet A Buddy Sports has some data on your ability, we will be able to assign handicaps and point spreads to ensure the match between athletes of differing abilities is played on a level playing field.",
+    ],
+  },
+  {
+    question: "How do funds from wagers get transferred from the winning team to the losing team?",
+    answer: [
+      "Each team will have a mandatory reporter who will declare that they won or lost. Bet A Buddy Sports integrates with Venmo and funds are sent from the losing team to the winning team.",
+    ],
+  },
+  {
+    question: "What if users who are partnered cannot get a match with people they send challenge requests to?",
+    answer: [
+      "If you're having trouble finding opponents via challenge requests, you can opt to move into the challenge suggestions where the app will match you and your teammate with random opponents that you do not know.",
+      "This is similar to how a dating site would work where teams with similar criteria are suggested to you and vice versa.",
+    ],
+  },
+];
+
 const FAQ = () => {
   const [openIndex, setOpenIndex] = useState<number>(-1);
 
@@ -12,58 +58,36 @@ const FAQ = () => {
     setOpenIndex(openIndex === index ? -1 : index);
   };
 
-  return (
-    <section id="faq" className="py-10 px-4 bg-gradient-to-r from-green-400 via-green-600 to-green-800 bg-size-200 animate-wave-gradient">
+	return (
+    <section id="faq" className="py-10 px-4 bg-gray-100">
       <div className="max-w-3xl mx-auto text-center">
-        <h1 className="font-bold mb-8 text-white">How It Works</h1>
+        <h1 className="font-bold mb-6">Frequently Asked Questions</h1>
         <div className="space-y-4 text-left">
-          {[
-            {
-              question: "How do I place a bet?",
-              answer:
-                "Simply create a bet, invite your friends, and track the results.",
-            },
-            {
-              question: "Is it free to join?",
-              answer:
-                "Yes, signing up and placing bets with friends is completely free.",
-            },
-            {
-              question: "How do I place a bet?",
-              answer:
-                "Simply create a bet, invite your friends, and track the results.",
-            },
-            {
-              question: "Is it free to join?",
-              answer:
-                "Yes, signing up and placing bets with friends is completely free.",
-            },
-          ].map((faq, index) => (
-            <div
-              key={index}
-              className="bg-white p-4 shadow-md rounded-lg border border-gray-200"
-            >
+          {FAQ_DATA.map((faq, index) => (
+            <div key={index} className="bg-white p-4 shadow-md rounded-lg border border-gray-200">
               <button
                 onClick={() => toggleFAQ(index)}
                 className="font-semibold cursor-pointer w-full text-left flex justify-between items-center"
               >
                 <h2>{faq.question}</h2>
-                <span
-                  className={`transform transition-transform duration-300 ${
-                    openIndex === index ? "rotate-180" : ""
-                  }`}
-                >
+                <span className={`transform transition-transform duration-300 ${openIndex === index ? "rotate-180" : ""}`}>
                   ▼
                 </span>
               </button>
-              <div
-                className={`overflow-hidden transition-all duration-300 ease-in-out ${
-                  openIndex === index
-                    ? "max-h-[500px] opacity-100"
-                    : "max-h-0 opacity-0"
-                }`}
-              >
-                <p className="mt-2">{faq.answer}</p>
+              <div className={`overflow-hidden transition-all duration-300 ease-in-out ${openIndex === index ? "max-h-[500px] opacity-100" : "max-h-0 opacity-0"}`}>
+                <div className="mt-2">
+                  {faq.answer.map((part, i) =>
+                    Array.isArray(part) ? (
+                      <ul key={i} className="list-disc pl-5">
+                        {part.map((sub, j) => (
+                          <li key={j}>{sub}</li>
+                        ))}
+                      </ul>
+                    ) : (
+                      <p key={i} className="mt-2">{part}</p>
+                    )
+                  )}
+                </div>
               </div>
             </div>
           ))}
@@ -161,7 +185,7 @@ export default function Home() {
     <div className="relative bg-gray-50 min-h-screen text-gray-900">
       {/* Navbar */}
       <nav className="w-full bg-black shadow-md py-4 px-6 flex justify-between items-center fixed top-0 left-0 z-50">
-        <h2 className="text-3xl font-bold text-primary uppercase">Bet A Buddy Sports</h2>
+        <h2 className="text-3xl font-bold text-primary uppercase header">Bet A Buddy Sports</h2>
         {/* <ul className="flex space-x-6">
           <li><a href="#about" className="hover:text-primary">About</a></li>
           <li><a href="#features" className="hover:text-primary">Features</a></li>
