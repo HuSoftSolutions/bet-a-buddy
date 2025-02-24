@@ -49,6 +49,12 @@ const FAQ_DATA = [
       "This is similar to how a dating site would work where teams with similar criteria are suggested to you and vice versa.",
     ],
   },
+	{
+		question: "Is golf the only sport?",
+		answer: [
+			"Golf is the feature sport but additional sports like bowling, pickleball, horseshoes, billiards, corn hole will be usable sports in the near future."
+		]
+	}
 ];
 
 const FAQ = () => {
@@ -208,7 +214,7 @@ export default function Home() {
           playsInline
           ref={videoRef}
         >
-          <source src="/betabuddyherovideo_3.mp4" type="video/mp4" />
+          <source src="/hero_video.mp4" type="video/mp4" />
         </video>
 
         {/* Dark overlay */}
