@@ -1,9 +1,8 @@
 "use client";
 
+import Modal from "@/components/sign-up-modal";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
-import { IoCloseOutline } from "react-icons/io5";
-
 
 const FAQ_DATA = [
   {
@@ -103,56 +102,7 @@ const FAQ = () => {
   );
 };
 
-interface ModalProps {
-  show: boolean;
-  close: () => void;
-}
 
-const Modal: React.FC<ModalProps> = ({ show, close }) => {
-  return show === true ? (
-    <div className="fixed top-0 left-0 h-screen w-full flex items-center justify-center z-20 bg-black bg-opacity-80 text-white">
-      <div className="w-full sm:w-[400px] h-auto bg-gradient-to-b from-primary-dark to-primary-light flex flex-col z-30 relative rounded-lg p-5 shadow-lg">
-        {/* Close Button */}
-        <div className="absolute top-2 right-2 cursor-pointer" onClick={close}>
-          <IoCloseOutline className="w-8 h-8 text-white hover:text-gray-300 transition duration-300" />
-        </div>
-
-        {/* Sign-up Form */}
-        <div className="w-full text-center">
-          <h2 className="font-bold mb-4">Stay Updated!</h2>
-          <p className="mb-6">
-            Sign up for exclusive updates and news about Bet A Buddy Sports.
-          </p>
-
-          <form className="space-y-4">
-            <div>
-              <input
-                type="text"
-                placeholder="Your Name"
-                className="w-full px-4 py-2 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-dark"
-                required
-              />
-            </div>
-            <div>
-              <input
-                type="email"
-                placeholder="Your Email"
-                className="w-full px-4 py-2 text-gray-900 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-primary-dark"
-                required
-              />
-            </div>
-            <button
-              type="submit"
-              className="btn w-full font-semibold py-2 rounded-md shadow-md transition duration-300"
-            >
-              Sign Up
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
-  ) : null;
-};
 
 export default function Home() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
@@ -186,6 +136,38 @@ export default function Home() {
       setFade(video.currentTime >= video.duration - 1);
     });
   }, []);
+
+
+	// async function sendEmail() {
+	// 	const emailData = {
+	// 		to: "recipient@example.com",
+	// 		subject: "Welcome to Bet A Buddy Sports!",
+	// 		html: `
+	// 			<div style="font-family: Arial, sans-serif; color: #333;">
+	// 				<h1 style="color: #1a73e8;">Welcome!</h1>
+	// 				<p>Thanks for signing up. Enjoy our sports updates!</p>
+	// 			</div>
+	// 		`,
+	// 	};
+	
+	// 	try {
+	// 		const res = await fetch("/api/send-email", {
+	// 			method: "POST",
+	// 			headers: { "Content-Type": "application/json" },
+	// 			body: JSON.stringify(emailData),
+	// 		});
+	
+	// 		const result = await res.json();
+	// 		if (result.success) {
+	// 			console.log("Email sent successfully!");
+	// 		} else {
+	// 			console.error("Failed to send email:", result.error);
+	// 		}
+	// 	} catch (error) {
+	// 		console.error("Error sending email:", error);
+	// 	}
+	// }
+	
 
   return (
     <div className="relative bg-gray-50 min-h-screen text-gray-900">
