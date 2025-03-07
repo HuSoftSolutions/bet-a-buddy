@@ -2,7 +2,7 @@
   "name": "bet-a-buddy-webapp",
   "version": "0.1.0",
   "private": true,
-	"type": "module",
+  "type": "module",
   "scripts": {
     "dev": "next dev",
     "build": "next build",
@@ -12,6 +12,8 @@
   "dependencies": {
     "@sendgrid/mail": "^8.1.4",
     "dotenv": "^16.4.7",
+    "firebase": "^11.4.0",
+    "firebase-admin": "^13.2.0",
     "next": "15.1.7",
     "node-fetch": "^3.3.2",
     "react": "^19.0.0",

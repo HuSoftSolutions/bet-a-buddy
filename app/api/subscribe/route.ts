@@ -1,4 +1,6 @@
+import { refreshAccessToken } from "@/lib/refresh-token"; // adjust path as needed
 import { NextResponse } from "next/server";
+import fetch from "node-fetch";
 
 interface ContactPayload {
   email_address: string;
@@ -22,20 +24,22 @@ export async function POST(request: Request) {
       );
     }
 
-    // Retrieve Constant Contact credentials
-    const ACCESS_TOKEN = process.env.CONSTANT_CONTACT_ACCESS_TOKEN;
+    // Retrieve Constant Contact list ID from env.
     const LIST_ID = process.env.CONSTANT_CONTACT_MAIN_LIST_ID;
-    if (!ACCESS_TOKEN || !LIST_ID) {
+    if (!LIST_ID) {
       return NextResponse.json(
-        { success: false, error: "Missing Constant Contact credentials." },
+        { success: false, error: "Missing Constant Contact list ID." },
         { status: 500 }
       );
     }
 
-    // Build the minimal payload
+    // Get a valid access token by refreshing it if needed.
+    const ACCESS_TOKEN = await refreshAccessToken();
+
+    // Build the minimal payload.
     const payload: ContactPayload = {
       first_name,
-      last_name: last_name,
+      last_name,
       list_memberships: [LIST_ID],
       email_address: email.trim().substring(0, 50),
     };
@@ -72,7 +76,6 @@ export async function POST(request: Request) {
         { status: 500 }
       );
     }
-    // Fallback for non-Error exceptions
     return NextResponse.json(
       { success: false, error: "Unknown error occurred." },
       { status: 500 }
