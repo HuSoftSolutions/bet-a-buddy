@@ -66,7 +66,7 @@ const FAQ = () => {
 	return (
     <section id="faq" className="py-10 px-4 bg-gray-200">
       <div className="max-w-3xl mx-auto text-center">
-        <h1 className="font-bold mb-6">Frequently Asked Questions</h1>
+        <h1 className="font-bold mb-6 !text-secondary">Frequently Asked Questions</h1>
         <div className="space-y-4 text-left">
           {FAQ_DATA.map((faq, index) => (
             <div key={index} className="bg-white p-4 shadow-md rounded-lg border border-gray-200">
@@ -275,9 +275,9 @@ export default function Home() {
       <FAQ />
 
       {/* Contact Section */}
-      <section id="contact" className="bg-secondary text-white py-16 px-4 text-center">
+      <section id="contact" className="bg-primary text-white py-16 px-4 text-center">
         <div className="max-w-4xl mx-auto">
-          <h1 className="font-bold mb-4">Get in Touch</h1>
+          <h1 className="font-bold mb-4 !text-white">Get in Touch</h1>
           <p className="">
             Have questions? Reach out to us at support@betabuddy.com
           </p>
