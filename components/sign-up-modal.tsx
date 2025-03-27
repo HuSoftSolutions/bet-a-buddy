@@ -89,7 +89,7 @@ const Modal: React.FC<ModalProps> = ({ show, close }) => {
 
   return (
     <div className="fixed top-0 left-0 h-screen w-full flex items-center justify-center z-20 bg-black bg-opacity-80 text-white">
-      <div className="w-full sm:w-[400px] h-auto bg-gradient-to-b from-primary-dark to-primary-light flex flex-col z-30 relative rounded-lg p-5 shadow-lg">
+      <div className="w-full sm:w-[400px] h-auto bg-secondary flex flex-col z-30 relative rounded-lg p-5 shadow-lg">
         {/* Close Button */}
         <div className="absolute top-2 right-2 cursor-pointer" onClick={close}>
           <IoCloseOutline className="w-8 h-8 text-white hover:text-gray-300 transition duration-300" />

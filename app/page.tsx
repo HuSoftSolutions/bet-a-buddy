@@ -64,7 +64,7 @@ const FAQ = () => {
   };
 
 	return (
-    <section id="faq" className="py-10 px-4 bg-gray-100">
+    <section id="faq" className="py-10 px-4 bg-gray-200">
       <div className="max-w-3xl mx-auto text-center">
         <h1 className="font-bold mb-6">Frequently Asked Questions</h1>
         <div className="space-y-4 text-left">
@@ -172,7 +172,7 @@ export default function Home() {
   return (
     <div className="relative bg-gray-50 min-h-screen text-gray-900">
       {/* Navbar */}
-      <nav className="w-full bg-black shadow-md py-4 px-6 flex justify-between items-center fixed top-0 left-0 z-50">
+      <nav className="w-full bg-white shadow-md py-4 px-6 flex justify-between items-center fixed top-0 left-0 z-50">
         <h2 className="text-3xl font-bold text-primary uppercase header">Bet A Buddy Sports</h2>
         {/* <ul className="flex space-x-6">
           <li><a href="#about" className="hover:text-primary">About</a></li>
@@ -205,14 +205,11 @@ export default function Home() {
         {/* Title and tagline */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
 					{/* <div className="bg-primary-dark p-10 rounded-xl bg-opacity-70 border-8 border-primary-dark"> */}
-					<Image src="betabuddysportslogo-green.svg" width={100} height={100} className="mb-5" alt="Logo" />
+					<Image src="/logo.png" width={500} height={400} className="px-5" alt="Logo" />
 
 					<div className="">
 
-          <h1 className="font-bold text-primary uppercase">
-            Bet A Buddy Sports
-          </h1>
-          <p className="px-3 mt-2 text-gray-300">
+          <p className="px-3 mt-2 text-gray-300 italic">
 					 Partner up, challenge others, and control the outcome with your skills to cash in! 
           </p>
           <button className="btn py-2 px-6 rounded-full shadow-md mt-10">
@@ -236,20 +233,20 @@ export default function Home() {
 
 
       {/* Features Section */}
-      <section id="features" className="py-16 px-4 flex flex-col items-center bg-black">
+      <section id="features" className="py-16 px-4 flex flex-col items-center bg-secondary">
 				<h1 className="font-extrabold pb-10 text-white uppercase">Bet on your<span className="text-primary">$</span>elf</h1>
 
         <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 text-center">
           <div className="bg-white p-6 shadow-md rounded-lg border border-gray-200 transform transition duration-500 hover:scale-105">
-            <h2 className="font-semibold mb-2 text-primary-dark">Easy Bets</h2>
+            <h2 className="font-semibold mb-2 text-primary">Easy Bets</h2>
             <p className="text-primary">Place friendly wagers with your buddies in just a few clicks.</p>
           </div>
           <div className="bg-white p-6 shadow-md rounded-lg border border-gray-200 transform transition duration-500 hover:scale-105">
-            <h2 className="font-semibold mb-2 text-primary-dark">Track Results</h2>
+            <h2 className="font-semibold mb-2 text-primary">Track Results</h2>
             <p className="text-primary">Real-time updates on bets, winnings, and leaderboards.</p>
           </div>
           <div className="bg-white p-6 shadow-md rounded-lg border border-gray-200 transform transition duration-500 hover:scale-105">
-            <h2 className="font-semibold mb-2 text-primary-dark">Win Big</h2>
+            <h2 className="font-semibold mb-2 text-primary">Win Big</h2>
             <p className="text-primary">Win cash on the wager AND win points redeemable for prizes.</p>
           </div>
         </div>
@@ -278,7 +275,7 @@ export default function Home() {
       <FAQ />
 
       {/* Contact Section */}
-      <section id="contact" className="bg-gray-100 py-16 px-4 text-center">
+      <section id="contact" className="bg-secondary text-white py-16 px-4 text-center">
         <div className="max-w-4xl mx-auto">
           <h1 className="font-bold mb-4">Get in Touch</h1>
           <p className="">
@@ -290,7 +287,7 @@ export default function Home() {
       <Modal show={showModal} close={() => setShowModal(false)} />
 
       {/* Footer */}
-      <footer className="bg-black text-white text-center py-6">
+      <footer className="bg-white text-primary text-center py-6 font-extrabold">
         <p>
           &copy; {new Date().getFullYear()} Bet A Buddy Sports. All Rights Reserved.
         </p>

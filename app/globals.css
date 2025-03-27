@@ -32,7 +32,7 @@ body {
 }
 
 h1 {
-  @apply text-4xl sm:text-7xl;
+  @apply text-4xl sm:text-7xl text-primary;
   font-family: "Karantina", sans-serif;
 }
 
@@ -43,7 +43,7 @@ h1 {
 
 
 .btn {
-  @apply bg-primary-dark hover:bg-primary text-white text-lg sm:text-2xl;
+  @apply bg-primary hover:scale-110 transition-all duration-300 ease-linear text-white text-lg sm:text-2xl;
   font-family: "Karantina", sans-serif;
 	
 }

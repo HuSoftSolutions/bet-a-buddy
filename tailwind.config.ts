@@ -13,9 +13,12 @@ export default {
         foreground: "var(--foreground)",
 				primary: {
           light: '#4ade80',  
-          DEFAULT: '#16a34a',
+          DEFAULT: '#1B1464',
           dark: '#14532d',
         },
+				secondary: {
+					DEFAULT: '#C1272D'
+				}
       },
 			animation: {
         'wave-gradient': 'wave 7s infinite linear',
