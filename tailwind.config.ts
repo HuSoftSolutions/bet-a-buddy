@@ -12,12 +12,10 @@ export default {
         background: "var(--background)",
         foreground: "var(--foreground)",
 				primary: {
-          light: '#4ade80',  
-          DEFAULT: '#1B1464',
-          dark: '#14532d',
+          DEFAULT: '#C1272D',
         },
 				secondary: {
-					DEFAULT: '#C1272D'
+					DEFAULT: '#000'
 				}
       },
 			animation: {

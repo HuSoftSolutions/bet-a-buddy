@@ -205,7 +205,7 @@ export default function Home() {
         {/* Title and tagline */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center">
 					{/* <div className="bg-primary-dark p-10 rounded-xl bg-opacity-70 border-8 border-primary-dark"> */}
-					<Image src="/logo.png" width={500} height={400} className="px-5" alt="Logo" />
+					<Image src="/logo_white.png" width={500} height={400} className="px-5" alt="Logo" />
 
 					<div className="">
 
