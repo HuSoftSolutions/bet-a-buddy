@@ -250,7 +250,7 @@ export default function Home() {
               <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold">4</div>
             </div>
             <h2 className="font-semibold mb-3 text-xl text-primary">Redeem Locally</h2>
-            <p className="text-primary">Use your Buddy Points at real businesses like Romo's Pizza, Park Lane Tobacconist, Van Patten Golf, and more</p>
+            <p className="text-primary">Use your Buddy Points at real businesses like Romo&apos;s Pizza, Park Lane Tobacconist, Van Patten Golf, and more</p>
           </div>
         </div>
       </section>
