@@ -3,24 +3,25 @@
 import Modal from "@/components/sign-up-modal";
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { IoCloseOutline } from "react-icons/io5";
 
 const FAQ_DATA = [
   {
-    question: "How do users earn points?",
+    question: "How do users earn Buddy Points?",
     answer: [
-      "Users earn points on three different occasions:",
+      "Users earn Buddy Points on three different occasions:",
       [
-        "Matching with a partner",
-        "Matching with an opponent",
-        "Winning the match",
+        "Linking with a partner",
+        "Finding opponents",
+        "Playing matches"
       ],
       "You earn more points when you match with partners and opponents you haven't matched with before.",
     ],
   },
   {
-    question: "How do users redeem points for prizes?",
+    question: "How do users redeem Buddy Points for rewards?",
     answer: [
-      "Users redeem prizes with their accumulated points by heading over to the merchandise store to discover what they are eligible for based on their accumulated point total.",
+      "Users can redeem their Buddy Points at local businesses like Romo's Pizza, Park Lane Tobacconist, Van Patten Golf, and more. Simply visit these locations and show your accumulated points to receive special offers and discounts.",
     ],
   },
   {
@@ -108,6 +109,7 @@ export default function Home() {
   const videoRef = useRef<HTMLVideoElement | null>(null);
   const [fade, setFade] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
+  const [showBanner, setShowBanner] = useState<boolean>(true);
 
   useEffect(() => {
     window.history.replaceState({}, document.title, window.location.pathname);
@@ -137,42 +139,24 @@ export default function Home() {
     });
   }, []);
 
-
-	// async function sendEmail() {
-	// 	const emailData = {
-	// 		to: "recipient@example.com",
-	// 		subject: "Welcome to Bet A Buddy Sports!",
-	// 		html: `
-	// 			<div style="font-family: Arial, sans-serif; color: #333;">
-	// 				<h1 style="color: #1a73e8;">Welcome!</h1>
-	// 				<p>Thanks for signing up. Enjoy our sports updates!</p>
-	// 			</div>
-	// 		`,
-	// 	};
-	
-	// 	try {
-	// 		const res = await fetch("/api/send-email", {
-	// 			method: "POST",
-	// 			headers: { "Content-Type": "application/json" },
-	// 			body: JSON.stringify(emailData),
-	// 		});
-	
-	// 		const result = await res.json();
-	// 		if (result.success) {
-	// 			console.log("Email sent successfully!");
-	// 		} else {
-	// 			console.error("Failed to send email:", result.error);
-	// 		}
-	// 	} catch (error) {
-	// 		console.error("Error sending email:", error);
-	// 	}
-	// }
-	
-
   return (
     <div className="relative bg-gray-50 min-h-screen text-gray-900">
-      {/* Navbar */}
-      <nav className="w-full bg-white shadow-md py-4 px-6 flex justify-between items-center fixed top-0 left-0 z-50">
+      {/* Development Banner */}
+      {showBanner && (
+        <div className="fixed top-0 left-0 w-full bg-primary text-white py-2 text-center font-bold z-[100] flex justify-center items-center">
+          <div className="flex-grow">⚠️ APP DEVELOPMENT UNDERWAY</div>
+          <button 
+            onClick={() => setShowBanner(false)} 
+            className="mr-4 hover:text-gray-200 transition-colors"
+            aria-label="Close banner"
+          >
+            <IoCloseOutline size={24} />
+          </button>
+        </div>
+      )}
+      
+      {/* Navbar - adjusted top padding based on banner visibility */}
+      <nav className={`w-full bg-white shadow-md py-4 px-6 flex justify-between items-center fixed ${showBanner ? 'top-8' : 'top-0'} left-0 z-50 transition-all duration-300`}>
         <h2 className="text-3xl font-bold text-primary uppercase header">Bet A Buddy Sports</h2>
         {/* <ul className="flex space-x-6">
           <li><a href="#about" className="hover:text-primary">About</a></li>
@@ -183,8 +167,8 @@ export default function Home() {
         </ul> */}
       </nav>
 
-      {/* Hero Section */}
-      <section className="relative h-screen overflow-hidden">
+      {/* Hero Section - adjusted based on banner visibility */}
+      <section className={`relative h-screen ${showBanner ? 'pt-8' : 'pt-0'} overflow-hidden transition-all duration-300`}>
         {/* Video background */}
         <video
           className={`absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-1000 ${
@@ -210,7 +194,7 @@ export default function Home() {
 					<div className="">
 
           <p className="px-3 mt-2 text-gray-300 italic">
-					 Partner up, challenge others, and control the outcome with your skills to cash in! 
+					 Play Local. Earn Points. Redeem Rewards.
           </p>
           <button className="btn py-2 px-6 rounded-full shadow-md mt-10">
             <a href="#about" className="hover:text-white">
@@ -226,28 +210,47 @@ export default function Home() {
         <div className="max-w-4xl mx-auto">
           <h1 className="font-extrabold mb-4 text-primary">What is Bet A Buddy Sports?</h1>
           <p className="text-primary">
-					A fun and social way to place bets with friends and use rewards points for prizes.
+            Compete in real sports matches with your friends and earn Buddy Points every time you link with a partner, find opponents, and play.
           </p>
         </div>
       </section>
 
 
-      {/* Features Section */}
-      <section id="features" className="py-16 px-4 flex flex-col items-center bg-secondary">
-				<h1 className="font-extrabold pb-10 text-white uppercase">Bet on your<span className="text-primary">$</span>elf</h1>
+      {/* Features Section - Improved Design */}
+      <section id="features" className="py-20 px-4 flex flex-col items-center bg-secondary">
+        <h1 className="font-extrabold pb-12 text-white uppercase text-center">How It Works</h1>
 
-        <div className="max-w-5xl mx-auto grid md:grid-cols-3 gap-8 text-center">
-          <div className="bg-white p-6 shadow-md rounded-lg border border-gray-200 transform transition duration-500 hover:scale-105">
-            <h2 className="font-semibold mb-2 text-primary">Easy Bets</h2>
-            <p className="text-primary">Place friendly wagers with your buddies in just a few clicks.</p>
+        <div className="max-w-6xl mx-auto grid md:grid-cols-4 gap-10 text-center">
+          <div className="bg-white p-8 shadow-lg rounded-xl border-2 border-gray-200 transform transition duration-500 hover:scale-105 hover:shadow-xl">
+            <div className="mb-4 flex justify-center">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold">1</div>
+            </div>
+            <h2 className="font-semibold mb-3 text-xl text-primary">Link Up</h2>
+            <p className="text-primary">Match with your golf partner and opponents</p>
           </div>
-          <div className="bg-white p-6 shadow-md rounded-lg border border-gray-200 transform transition duration-500 hover:scale-105">
-            <h2 className="font-semibold mb-2 text-primary">Track Results</h2>
-            <p className="text-primary">Real-time updates on bets, winnings, and leaderboards.</p>
+          
+          <div className="bg-white p-8 shadow-lg rounded-xl border-2 border-gray-200 transform transition duration-500 hover:scale-105 hover:shadow-xl">
+            <div className="mb-4 flex justify-center">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold">2</div>
+            </div>
+            <h2 className="font-semibold mb-3 text-xl text-primary">Compete</h2>
+            <p className="text-primary">Play a match and submit your score</p>
           </div>
-          <div className="bg-white p-6 shadow-md rounded-lg border border-gray-200 transform transition duration-500 hover:scale-105">
-            <h2 className="font-semibold mb-2 text-primary">Win Big</h2>
-            <p className="text-primary">Win cash on the wager AND win points redeemable for prizes.</p>
+          
+          <div className="bg-white p-8 shadow-lg rounded-xl border-2 border-gray-200 transform transition duration-500 hover:scale-105 hover:shadow-xl">
+            <div className="mb-4 flex justify-center">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold">3</div>
+            </div>
+            <h2 className="font-semibold mb-3 text-xl text-primary">Earn Points</h2>
+            <p className="text-primary">Get rewarded for every matchup</p>
+          </div>
+          
+          <div className="bg-white p-8 shadow-lg rounded-xl border-2 border-gray-200 transform transition duration-500 hover:scale-105 hover:shadow-xl">
+            <div className="mb-4 flex justify-center">
+              <div className="w-16 h-16 bg-primary rounded-full flex items-center justify-center text-white text-2xl font-bold">4</div>
+            </div>
+            <h2 className="font-semibold mb-3 text-xl text-primary">Redeem Locally</h2>
+            <p className="text-primary">Use your Buddy Points at real businesses like Romo's Pizza, Park Lane Tobacconist, Van Patten Golf, and more</p>
           </div>
         </div>
       </section>
@@ -267,7 +270,7 @@ export default function Home() {
               setShowModal(true);
             }}
           >
-            Sign Up Now
+            Join the Competition. Start Earning.
           </button>
         </div>
       </section>
