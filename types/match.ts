@@ -8,6 +8,7 @@ export interface Match {
   numberOfHoles: number;
   location?: string;
   locationName?: string;
+  address?: Location;
   scheduledFor?: number;
   status: 'pending' | 'active' | 'completed' | 'cancelled';
   createdAt: number;
@@ -16,6 +17,7 @@ export interface Match {
   scores?: Record<number, Record<string, number>>;
   readyForPointsAward?: boolean;
   pointsAwarded?: boolean;
+  type?: 'invite';
 }
 
 export interface Location {
