@@ -255,6 +255,104 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Buddy Points Rewards Section */}
+      <section id="points" className="py-20 px-4 bg-gray-100">
+        <div className="max-w-6xl mx-auto">
+          <h1 className="font-extrabold mb-12 text-primary uppercase text-center">Buddy Points Rewards</h1>
+          
+          <div className="grid md:grid-cols-2 gap-10">
+            <div className="bg-white p-8 rounded-xl shadow-md">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-bold text-gray-800">Earn Points</h2>
+              </div>
+              <p className="text-gray-600 mb-4">
+                Earn Buddy Points every time you:
+              </p>
+              <ul className="space-y-2 mb-6">
+                <li className="flex items-center">
+                  <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Link with a partner
+                </li>
+                <li className="flex items-center">
+                  <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Find opponents
+                </li>
+                <li className="flex items-center">
+                  <svg className="h-5 w-5 text-green-500 mr-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+                  </svg>
+                  Play matches
+                </li>
+              </ul>
+              <p className="text-gray-600 italic">
+                You earn more points when you match with partners and opponents you haven&apos;t matched with before.
+              </p>
+            </div>
+            
+            <div className="bg-white p-8 rounded-xl shadow-md">
+              <div className="flex items-center mb-6">
+                <div className="w-12 h-12 bg-primary rounded-full flex items-center justify-center text-white mr-4">
+                  <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z" />
+                  </svg>
+                </div>
+                <h2 className="text-2xl font-bold text-gray-800">Redeem Rewards</h2>
+              </div>
+              <p className="text-gray-600 mb-4">
+                Use your Buddy Points at local businesses for exclusive rewards:
+              </p>
+              <ul className="space-y-3 mb-6">
+                <li className="flex items-start">
+                  <div className="bg-gray-100 p-2 rounded-lg mr-3 mt-1">
+                    <svg className="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="font-medium">Romo&apos;s Pizza</span>
+                    <p className="text-sm text-gray-500">Free appetizer with purchase of any large pizza</p>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="bg-gray-100 p-2 rounded-lg mr-3 mt-1">
+                    <svg className="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="font-medium">Park Lane Tobacconist</span>
+                    <p className="text-sm text-gray-500">10% off on all tobacco products</p>
+                  </div>
+                </li>
+                <li className="flex items-start">
+                  <div className="bg-gray-100 p-2 rounded-lg mr-3 mt-1">
+                    <svg className="h-5 w-5 text-primary" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                  </div>
+                  <div>
+                    <span className="font-medium">Van Patten Golf</span>
+                    <p className="text-sm text-gray-500">Free range ball on your next round</p>
+                  </div>
+                </li>
+              </ul>
+              <p className="text-gray-600 italic">
+                Visit these businesses to redeem your Buddy Points for exclusive rewards!
+              </p>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Community Section */}
       <section id="community" className=" py-16 px-4">
         <div className="max-w-4xl mx-auto text-center">

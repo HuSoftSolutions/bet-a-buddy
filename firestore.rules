@@ -1,0 +1,188 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isSignedIn() {
+      return request.auth != null;
+    }
+    
+    function isOwner(userId) {
+      return isSignedIn() && request.auth.uid == userId;
+    }
+    
+    // Friend requests collection rules
+    match /friendRequests/{requestId} {
+      // Allow read if user is the sender or recipient
+      allow read: if isSignedIn() && (
+        resource.data.senderId == request.auth.uid || 
+        resource.data.recipientId == request.auth.uid
+      );
+      
+      // Allow create if user is the sender
+      allow create: if isSignedIn() && 
+                     request.resource.data.senderId == request.auth.uid &&
+                     request.resource.data.status == "pending";
+      
+      // Allow update if user is the recipient (for accepting/rejecting)
+      allow update: if isSignedIn() && 
+                     resource.data.recipientId == request.auth.uid &&
+                     (request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status', 'updatedAt']) ||
+                      request.resource.data.diff(resource.data).affectedKeys().hasOnly(['status']));
+      
+      // Allow delete if user is the sender or recipient
+      allow delete: if isSignedIn() && (
+        resource.data.senderId == request.auth.uid || 
+        resource.data.recipientId == request.auth.uid
+      );
+    }
+
+    // Friends collection rules
+    match /friends/{friendshipId} {
+      // Allow read if user is part of the friendship
+      allow read: if isSignedIn() && (
+        resource.data.user1Id == request.auth.uid || 
+        resource.data.user2Id == request.auth.uid
+      );
+      
+      // Allow create if user is one of the users in the friendship
+      allow create: if isSignedIn() && (
+        request.resource.data.user1Id == request.auth.uid || 
+        request.resource.data.user2Id == request.auth.uid
+      );
+      
+      // Allow delete if user is part of the friendship
+      allow delete: if isSignedIn() && (
+        resource.data.user1Id == request.auth.uid || 
+        resource.data.user2Id == request.auth.uid
+      );
+    }
+
+    // User collection rules
+    match /users/{userId} {
+      // Allow read for basic profile info for all authenticated users
+      // Full profile access only for the user themselves or their friends
+      allow read: if isSignedIn();
+      
+      // Allow creation of user document during registration
+      allow create: if isOwner(userId);
+      
+      // Allow updates to own profile
+      allow update: if isOwner(userId);
+      
+      // No one can delete user profiles
+      allow delete: if false;
+    }
+    
+    // Match collection rules
+    match /matches/{matchId} {
+      // Allow read access to authenticated users for:
+      // 1. All matches (for listing/querying)
+      // 2. Specific match details if they're public, the user is host, or a participant
+      // 3. Any authenticated user can read a match when joining via invite link
+      allow read: if isSignedIn();
+      
+      // Allow create if user is authenticated and sets themselves as host
+      allow create: if isSignedIn() && 
+                     request.resource.data.hostId == request.auth.uid &&
+                     request.resource.data.participants.hasAny([request.auth.uid]);
+      
+      // Allow update if user is the host or a participant (with limited fields)
+      // OR if a user is joining via invite link (only adding themselves to participants)
+      allow update: if isSignedIn() && (
+                     resource.data.hostId == request.auth.uid || 
+                     resource.data.participants.hasAny([request.auth.uid]) || 
+                     (
+                       // For joining via invite: only allow adding self to participants array and email to participantEmails
+                       request.resource.data.diff(resource.data).affectedKeys().hasOnly(['participants', 'participantEmails', 'updatedAt']) &&
+                       request.resource.data.participants.hasAll(resource.data.participants) &&
+                       request.resource.data.participants.size() == resource.data.participants.size() + 1 &&
+                       request.resource.data.participants.hasAny([request.auth.uid]) &&
+                       request.resource.data.participantEmails.keys().hasAll(resource.data.participantEmails.keys()) &&
+                       request.resource.data.participantEmails.keys().hasOnly(
+                         resource.data.participantEmails.keys().concat([request.auth.uid])
+                       )
+                     )
+                   );
+      
+      // Allow delete only if user is the host
+      allow delete: if isSignedIn() && resource.data.hostId == request.auth.uid;
+    }
+    
+    // Match invitations collection rules
+    match /matchInvitations/{invitationId} {
+      // Allow read if user is authenticated
+      allow read: if isSignedIn();
+      
+      // Allow create if user is authenticated and is creating an invitation for a match they host
+      allow create: if isSignedIn() && 
+                     exists(/databases/$(database)/documents/matches/$(request.resource.data.matchId)) &&
+                     get(/databases/$(database)/documents/matches/$(request.resource.data.matchId)).data.hostId == request.auth.uid;
+      
+      // Allow update for accepting invitations
+      allow update: if isSignedIn() && 
+                     (resource.data.email == request.auth.token.email || 
+                      get(/databases/$(database)/documents/matches/$(resource.data.matchId)).data.hostId == request.auth.uid);
+      
+      // Allow deletion by the match host or the invited user
+      allow delete: if isSignedIn() && 
+                     (resource.data.email == request.auth.token.email || 
+                      get(/databases/$(database)/documents/matches/$(resource.data.matchId)).data.hostId == request.auth.uid);
+    }
+    
+    // Constant Contact tokens collection
+    match /constantContact/tokens {
+      // Only allow read/write to authenticated users
+      allow read, write: if isSignedIn();
+    }
+    
+    // User settings collection
+    match /userSettings/{userId} {
+      // Users can only read and write their own settings
+      allow read, write: if isOwner(userId);
+    }
+    
+    // Match comments collection
+    match /matchComments/{commentId} {
+      // Anyone can read comments
+      allow read: if isSignedIn();
+      
+      // Only match participants can create comments
+      allow create: if isSignedIn() && 
+                     exists(/databases/$(database)/documents/matches/$(request.resource.data.matchId)) &&
+                     get(/databases/$(database)/documents/matches/$(request.resource.data.matchId)).data.participants.hasAny([request.auth.uid]);
+      
+      // Only comment author can update or delete
+      allow update, delete: if isSignedIn() && resource.data.userId == request.auth.uid;
+    }
+    
+    // Match results collection
+    match /matchResults/{resultId} {
+      // Match participants can read results
+      allow read: if isSignedIn() && 
+                   exists(/databases/$(database)/documents/matches/$(resource.data.matchId)) &&
+                   get(/databases/$(database)/documents/matches/$(resource.data.matchId)).data.participants.hasAny([request.auth.uid]);
+      
+      // Only match host can create or update results
+      allow create, update: if isSignedIn() && 
+                             exists(/databases/$(database)/documents/matches/$(request.resource.data.matchId)) &&
+                             get(/databases/$(database)/documents/matches/$(request.resource.data.matchId)).data.hostId == request.auth.uid;
+      
+      // No one can delete results
+      allow delete: if false;
+    }
+
+    // Points history collection
+    match /pointsHistory/{historyId} {
+      // Users can read their own points history
+      allow read: if isSignedIn() && resource.data.userId == request.auth.uid;
+      
+      // Allow creation if user is authenticated and is part of the match
+      allow create: if isSignedIn() && 
+                    exists(/databases/$(database)/documents/matches/$(request.resource.data.matchId)) &&
+                    get(/databases/$(database)/documents/matches/$(request.resource.data.matchId)).data.participants.hasAny([request.auth.uid]);
+      
+      // No updates or deletions
+      allow update, delete: if false;
+    }
+  }
+}
