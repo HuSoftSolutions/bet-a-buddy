@@ -1,12 +1,12 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useParams, useRouter } from "next/navigation";
+import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete";
 import { useAuth } from "@/contexts/AuthContext";
 import { getMatch, updateMatch } from "@/firebase/services/matchService";
 import { Match } from "@/types/match";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { IoArrowBackOutline, IoSaveOutline } from "react-icons/io5";
-import GooglePlacesAutocomplete from "@/components/GooglePlacesAutocomplete";
 
 export default function EditMatch() {
   const { id } = useParams();
@@ -93,7 +93,8 @@ export default function EditMatch() {
       };
       
       if (scheduledFor) {
-        updateData.scheduledFor = new Date(scheduledFor).toISOString();
+        // Convert the ISO string date to a timestamp (number)
+        updateData.scheduledFor = new Date(scheduledFor).getTime();
       }
       
       await updateMatch(match.id, updateData);
@@ -171,16 +172,9 @@ export default function EditMatch() {
             </label>
             <GooglePlacesAutocomplete
               onPlaceSelect={(place) => {
-                if (place) {
-                  setAddress({
-                    address: place.formatted_address,
-                    lat: place.geometry.location.lat(),
-                    lng: place.geometry.location.lng(),
-                    placeId: place.place_id,
-                    locationName: place.name
-                  });
-                  setLocation(place.name || place.formatted_address);
-                }
+                // The place object already has the structure we need
+                setAddress(place);
+                setLocation(place.locationName || place.address);
               }}
               defaultValue={location}
             />
