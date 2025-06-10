@@ -8,9 +8,9 @@ import { doc, onSnapshot } from "firebase/firestore";
 import { useParams, useRouter } from "next/navigation";
 import { useCallback, useEffect, useState } from "react";
 import {
-	IoArrowBackOutline,
-	IoArrowForwardOutline,
-	IoHomeOutline
+    IoArrowBackOutline,
+    IoArrowForwardOutline,
+    IoHomeOutline
 } from "react-icons/io5";
 
 export default function ScoreEntryContainer() {
@@ -229,9 +229,11 @@ export default function ScoreEntryContainer() {
   // In the ScoreEntryContainer component, add this function to check if a hole has scores
   const hasScoreForHole = useCallback((holeNumber: number) => {
     // Check if the current user has a score for this hole in allScores (saved scores)
+    const userId = user?.uid;
     return !!allScores[holeNumber] && 
-      !!allScores[holeNumber][user?.uid] && 
-      allScores[holeNumber][user?.uid] > 0;
+      userId !== undefined &&
+      !!allScores[holeNumber][userId] && 
+      allScores[holeNumber][userId] > 0;
   }, [allScores, user?.uid]);
 
   // Add a function to check if all holes have scores for all participants
