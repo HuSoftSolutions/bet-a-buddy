@@ -127,7 +127,7 @@ export default function MatchHistory() {
                       </span>
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">
-                      {match.type === 'public' ? 'Public' : 'Invite Only'}
+                      {match.type === 'invite' ? 'Invite Only' : 'Public'}
                     </td>
                     <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
                       <Link 
