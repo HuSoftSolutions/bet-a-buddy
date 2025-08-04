@@ -324,7 +324,7 @@ The application uses Firebase Firestore with the following main collections:
    - **ACTIVE**: Currently sending emails for the app
 
 2. **Production API Key**
-   - Current Key: `[REDACTED - Contact current owner for API key]`
+   - Current Key: Contact current owner for access credentials
    - Permissions: Mail Send (Full Access)
    - **SECURITY**: Rotate key after handoff
 
